@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jonatan Sønderland Brekke | Webportefølje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --bg-soft: #ffffff;
+      --card: #ffffff;
+      --card-2: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0f766e;
+      --line: #e2e8f0;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Poppins, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      box-shadow: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--accent);
+      border-color: #cbd5e1;
+      background: #f8fafc;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 42px 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-card,
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      font-family: Poppins, sans-serif;
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      font-size: 1.04rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 64ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .portrait-card {
+      overflow: hidden;
+      padding: 14px;
+      position: relative;
+      background: white;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: calc(var(--radius) - 8px);
+      min-height: 420px;
+      background: #f8fafc;
+    }
+
+    .portrait-label {
+      position: absolute;
+      left: 28px;
+      bottom: 28px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px 0 6px;
+    }
+
+    .section-card {
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .section-header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 70ch;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .info-box,
+    .project-card,
+    .contact-card,
+    .skill-card {
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .info-box h3,
+    .project-card h3,
+    .contact-card h3,
+    .skill-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .info-box p,
+    .project-card p,
+    .contact-card p,
+    .skill-card p,
+    li {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #1e3a8a;
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      padding: 18px 20px;
+      border-left: 3px solid var(--accent);
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .timeline-item strong { display: block; margin-bottom: 6px; }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .project-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .footer {
+      padding: 18px 0 36px;
+      color: #64748b;
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .hero-card { padding: 24px; }
+      .portrait-card img { min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-badge">JS</div>
+        <div>
+          Jonatan Sønderland Brekke
+          <div style="font-size:0.88rem;color:var(--muted);font-weight:500;">Webportefølje for YFF</div>
+        </div>
+      </div>
+
+      <nav aria-label="Hovedmeny">
+        <ul>
+          <li><a href="#forside">Forside</a></li>
+          <li><a href="#om-meg">Om meg</a></li>
+          <li><a href="#programmering">Programmering</a></li>
+          <li><a href="#grafisk">Grafisk</a></li>
+          <li><a href="#kontakt">Kontakt meg</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="forside" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">IT og medieproduksjon • YFF-portefølje</div>
+          <h1>Jonatan Sønderland Brekke</h1>
+          <p class="lead">
+            Velkommen til min webportefølje. Her finner du prosjekter jeg har jobbet med i VG1,
+            med fokus på programmering, grafisk arbeid og utvikling av konsepter. Nettstedet viser
+            hva jeg kan, hva jeg lærer, og hvordan jeg liker å jobbe med digitale løsninger.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#programmering">Se programmering</a>
+            <a class="btn btn-secondary" href="#kontakt">Kontakt meg</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Fargepalett: blå / lilla</span>
+            <span class="tag">Typografi: Inter + Poppins</span>
+            <span class="tag">Fast navigasjon</span>
+          </div>
+        </div>
+
+        <div class="section-card portrait-card" style="padding:14px; position:relative;">
+          <img src="min-bilde.jpg" alt="Bilde av Jonatan Sønderland Brekke" />
+          <div class="portrait-label">Legg inn ditt eget bilde her</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="om-meg" class="section">
+      <div class="container section-card">
+        <div class="section-header">
+          <div>
+            <h2>Om meg</h2>
+            <p>En kort presentasjon av hvem jeg er, hva jeg har gjort, og hva jeg ønsker å lære mer om.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box">
+            <h3>Profil</h3>
+            <p>
+              Engasjert og serviceinnstilt person med stor interesse for programmering, utvikling av konsepter
+              og digitale løsninger. Motivert for å bidra med idéer, løse problemer og lære mer gjennom praktisk arbeid.
+              Jeg er fleksibel, lærevillig og positiv i møte med nye utfordringer.
+            </p>
+          </div>
+          <div class="info-box">
+            <h3>Språk og egenskaper</h3>
+            <p>
+              Norsk – flytende<br>
+              Engelsk – meget god<br><br>
+              Personlige egenskaper: serviceinnstilt, imøtekommende, fleksibel, tilpasningsdyktig,
+              punktlig, ansvarsbevisst og god samarbeidsevne.
+            </p>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="grid-2">
+          <div class="info-box">
+            <h3>Erfaring</h3>
+            <p>Arbeidsuke: Telenor</p>
+          </div>
+          <div class="info-box">
+            <h3>Utdanning</h3>
+            <p>
+              Bleiker videregående skole (2026 – )<br>
+              Studieretning: Informasjonsteknologi og medieproduksjon
+            </p>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="info-box">
+          <h3>CV-oversikt</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>Utdanning</strong>
+              Videregående skole – Bleiker videregående skole, 2026 – , Informasjonsteknologi og medieproduksjon.
+            </div>
+            <div class="timeline-item">
+              <strong>Arbeidserfaring</strong>
+              Arbeidsuke hos Telenor.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programmering" class="section">
+      <div class="container section-card">
+        <div class="section-header">
+          <div>
+            <h2>Programmering</h2>
+            <p>
+              Her kan du vise frem programmeringsprosjektene dine. Jeg har lagt inn GitHub-lenkene du sendte,
+              og bildene kan ligge i samme mappe som index.html.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="project-card">
+            <img src="quizz.png" alt="Skjermbilde av quizz-prosjektet" />
+            <h3>BleikerQuizz</h3>
+            <p>
+              Et quizz-prosjekt som viser hvordan jeg jobber med struktur, funksjonalitet og innhold.
+              Bildet over er lagt inn fra filen quizz.png.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Epiccoolduse8282/BleikerQuizz" target="_blank" rel="noopener">Åpne repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img src="png1.png" alt="Skjermbilde av programmeringsprosjekt png1" />
+            <h3>Prosjekt 2</h3>
+            <p>
+              Dette er et av prosjektene dine. Her kan du skrive hva du laget, hvilke språk du brukte,
+              og hva du lærte underveis.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Epiccoolduse8282/simon" target="_blank" rel="noopener">Åpne repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img src="png2.png" alt="Skjermbilde av programmeringsprosjekt png2" />
+            <h3>Prosjekt 3</h3>
+            <p>
+              Her kan du legge inn et nytt prosjekt eller en videreutvikling. Dette feltet passer fint til
+              å vise progresjon og nye idéer.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Epiccoolduse8282/dikemark" target="_blank" rel="noopener">Åpne repo</a>
+            </div>
+          </article>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="info-box">
+          <h3>Referanser</h3>
+          <p>GitHub-prosjekter du ville ha med i programmeringsseksjonen:</p>
+          <div class="tag-row">
+            <a class="tag" href="https://github.com/Epiccoolduse8282/simon" target="_blank" rel="noopener">simon</a>
+            <a class="tag" href="https://github.com/Epiccoolduse8282/dikemark" target="_blank" rel="noopener">dikemark</a>
+            <a class="tag" href="https://github.com/Epiccoolduse8282/BleikerQuizz" target="_blank" rel="noopener">BleikerQuizz</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section">
+      <div class="container section-card">
+        <div class="section-header">
+          <div>
+            <h2>Kontakt meg</h2>
+            <p>Kontaktinformasjonen din er samlet her, slik at bedrifter enkelt kan nå deg.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="contact-card">
+            <h3>Kontaktinformasjon</h3>
+            <div class="contact-list">
+              <div class="contact-item"><strong>Navn:</strong> Jonatan Sønderland Brekke</div>
+              <div class="contact-item"><strong>Telefon:</strong> 48395026</div>
+              <div class="contact-item"><strong>E-post:</strong> Jonatan.sonderland.brekke@gmail.com</div>
+              <div class="contact-item"><strong>Adresse:</strong> Snoveien 29, 1363 Høvik</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <h3>Kort om meg</h3>
+            <p>
+              Jeg er mest interessert i programmering og liker å utvikle konsepter. På denne porteføljen
+              kan du se arbeidene mine, både fra programmering og andre kreative oppgaver.
+            </p>
+            <p>
+              Denne siden kan brukes som vedlegg eller lenkes til sammen med CV og søknadsbrev når du søker praksisplass.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 Jonatan Sønderland Brekke • Webportefølje
+  </footer>
+</body>
+</html>
